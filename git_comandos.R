@@ -8,12 +8,12 @@ list.files(pattern = "")
 
 # Adicionando arquivo ----
 
-gert::git_add(list.files(pattern = "settando_")) |> 
+gert::git_add(list.files(pattern = "git_coma")) |> 
   as.data.frame()
 
 # Commitando ----
 
-gert::git_commit("Script para settar repositório git")
+gert::git_commit("Script para comandos de git")
 
 # Pushando ----
 
@@ -28,5 +28,3 @@ gert::git_pull()
 gert::git_reset_soft(ref = "HEAD~1")
 
 gert::git_reset_hard(ref = "HEAD~1")
-
-gert::git_merge(ref = "master")
