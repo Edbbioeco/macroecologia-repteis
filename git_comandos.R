@@ -4,18 +4,20 @@ library(gert)
 
 # Listando arquivos ----
 
-list.files(pattern = "")
+list.files(pattern = ".R$")
 
-gert::git_status() |> as.data.frame()
+gert::git_status() |> 
+  as.data.frame() |> 
+  dplyr::filter(file |> stringr::str_detect(".R$"))
 
 # Adicionando arquivo ----
 
-gert::git_add(list.files(pattern = "analises_div")) |> 
+gert::git_add(list.files(pattern = "registros_repteis.R")) |> 
   as.data.frame()
 
 # Commitando ----
 
-gert::git_commit("Script para analisar a diversidade biológica")
+gert::git_commit("Script para organizar os dados de registros de répteis")
 
 # Pushando ----
 
