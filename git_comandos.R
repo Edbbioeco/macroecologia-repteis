@@ -6,14 +6,16 @@ library(gert)
 
 list.files(pattern = "")
 
+gert::git_status() |> as.data.frame()
+
 # Adicionando arquivo ----
 
-gert::git_add(list.files(pattern = "git_coma")) |> 
+gert::git_add(list.files(pattern = "analises_div")) |> 
   as.data.frame()
 
 # Commitando ----
 
-gert::git_commit("Script para comandos de git")
+gert::git_commit("Script para analisar a diversidade biológica")
 
 # Pushando ----
 
