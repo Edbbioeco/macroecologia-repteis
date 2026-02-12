@@ -71,7 +71,7 @@ grade <- fom_recortada |>
                 dplyr::summarise(geometry = geometry |> sf::st_union()) |> 
                 sf::st_convex_hull()) |> 
   dplyr::filter(!name_region |> is.na()) |>
-  dplyr::mutate(ID = dplyr::row_number())
+  dplyr::mutate(ID = paste0("c", dplyr::row_number()))
 
 grade 
 
@@ -82,4 +82,5 @@ ggplot() +
 
 # Exportando ----
 
-grade |> sf::st_write("grade_fom.shp")
+grade |> sf::st_write("grade_fom.shp",
+                      append = TRUE)
