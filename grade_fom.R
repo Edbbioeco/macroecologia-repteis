@@ -52,11 +52,22 @@ ggplot() +
 
 ## Resolução em graus para 10km ----
 
-res <- (10 * 1) / 11.3194 
+res <- (10 * 1) / 111.3194 
 
 res
 
 ## Gerando a grade -----
 
 grade <- fom_recortada |> 
-  sf::st_make_grid(cellsize = res)
+  sf::st_make_grid(cellsize = res) |> 
+  sf::st_sf() |> 
+  sf::st_join(fom_recortada) |> 
+  dplyr::filter(!name_region |> is.na()) |>
+  dplyr::mutate(ID = dplyr::row_number())
+
+grade
+
+ggplot() +
+  geom_sf(data = fom_recortada, color = "forestgreen", fill = "forestgreen", 
+          alpha = 0.3) +
+  geom_sf(data = grade, color = "black", fill = NA)
