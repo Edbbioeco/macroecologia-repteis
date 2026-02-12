@@ -11,16 +11,28 @@ usethis::use_git()
 usethis::use_git_config(user.name = "Edbbioeco",
                         user.email = "edsonbbiologia@gmail.com")
 
-# Settando o repositório ----
+# Projeto utilizado ----
 
 usethis::proj_get()
 
-usethis::use_git_remote(name = "origin",
+# Settando o repositório ----
+
+## Público ----
+
+usethis::use_git_remote(name = "publico",
+                        url = "https://github.com/Edbbioeco/macroecologia-repteis.git",
+                        overwrite = TRUE)
+
+## Privado ----
+
+usethis::use_git_remote(name = "privado",
                         url = "https://github.com/Edbbioeco/artigo_repteis.git",
                         overwrite = TRUE)
 
-# Renomear o branch do master para main ----
+# Criando a branch main ----
 
-git_branch_delete("main")
+usethis::git_default_branch_configure()
+
+# Renomear o branch do master para main ----
 
 usethis::git_default_branch_rename(from = "master", to = "main")
