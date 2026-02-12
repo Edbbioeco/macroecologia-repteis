@@ -38,7 +38,9 @@ registros <- rgbif::occ_data(taxonKey = chave,
 
 ### Visualizando ----
 
-registros
+registros$data |> 
+  ggplot(aes(decimalLongitude, decimalLatitude)) +
+  geom_point()
 
 registros |> dplyr::glimpse()
 
