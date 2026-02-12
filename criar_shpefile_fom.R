@@ -50,3 +50,5 @@ ggplot() +
   geom_sf(data = fom, color = "forestgreen", fill = "forestgreen", alpha = 0.3)
 
 # Exportando ----
+
+fom |> sf::st_write("fom.shp")
