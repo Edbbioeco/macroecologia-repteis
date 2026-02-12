@@ -1,12 +1,10 @@
 # Pacotes ----
 
-library(geobr)
+library(sf)
 
 library(rgbif)
 
 library(tidyverse)
-
-library(sf)
 
 library(faunabr)
 
@@ -14,35 +12,53 @@ library(writexl)
 
 # Dados ----
 
-## Sul do Brasil ----
+## Grade da FOM ----
 
 ### Importando ----
 
+fom_grade <- sf::st_read("grade_fom.shp")
+
 ### Visualizando ----
+
+fom_grade
+
+ggplot() +
+  geom_sf(data = fom_grade)
 
 ## Dados de ocorrência ----
 
 ### Checando o taxonkey dos répteis ----
 
-chave <- rgbif::name_backbone(name = "Reptilia", rank = "class") |> 
-  dplyr::pull(usageKey)
+chaves_repteis <- function(classe){
+  
+  chave <- rgbif::name_backbone(name = classe, 
+                                rank = "class") |> 
+    dplyr::pull(usageKey)
+  
+  chaves <<- c(chaves, chave)
+  
+}
 
-chave
+chaves <- c()
+
+classe <- c("Squamata",
+            "Crocodylia",
+            "Testudines")
+
+classe
+
+purrr::map(classe, chaves_repteis)
+
+chaves
 
 ### Baixando ----
 
-registros <- rgbif::occ_data(taxonKey = chave,
-                country = "BR",
-                hasCoordinate = TRUE,
-                limit = 20000)
+registros <- rgbif::occ_data(classKey = c(11592253, 11418114),
+                             country = "BR",
+                             hasCoordinate = TRUE,
+                             limit = 1000)
 
 ### Visualizando ----
-
-registros$data |> 
-  ggplot(aes(decimalLongitude, decimalLatitude)) +
-  geom_point()
-
-registros |> dplyr::glimpse()
 
 # Tratando dados ----
 
