@@ -12,7 +12,14 @@ library(tidyverse)
 
 ### Importando ----
 
+br <- geobr::read_state()
+
 ### Visualizando ----
+
+br
+
+ggplot() +
+  geom_sf(data = br, color = "black")
 
 ## Formações vegetais do Brasil ----
 
@@ -33,5 +40,13 @@ veg |> dplyr::glimpse()
 fom <- veg |> dplyr::filter(nm_pretet == "Floresta Ombrófila Mista")
 
 ## Visualizando -----
+
+fom
+
+fom |> dplyr::glimpse()
+
+ggplot() +
+  geom_sf(data = br, color = "black") +
+  geom_sf(data = fom, color = "forestgreen", fill = "forestgreen", alpha = 0.3)
 
 # Exportando ----
