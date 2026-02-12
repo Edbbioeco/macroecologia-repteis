@@ -49,4 +49,14 @@ ggplot() +
   geom_sf(data = br, color = "black") +
   geom_sf(data = fom_recortada, color = "forestgreen", fill = "forestgreen", 
           alpha = 0.3)
-Blz chefe
+
+## Resolução em graus para 10km ----
+
+res <- (10 * 1) / 11.3194 
+
+res
+
+## Gerando a grade -----
+
+grade <- fom_recortada |> 
+  sf::st_make_grid(cellsize = res)
