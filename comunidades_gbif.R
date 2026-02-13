@@ -96,7 +96,13 @@ ggplot() +
 
 ## Lista de espécies ----
 
+gbif_sf_fom |> 
+  dplyr::pull(species) |> 
+  unique()
+
 ## tratando as espécies ----
+
+# Matriz de composição ----
 
 ## Montando a matriz de composição ----
 
