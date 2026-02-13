@@ -50,6 +50,21 @@ ggplot() +
   geom_sf(data = fom_recortada, color = "forestgreen", fill = "forestgreen", 
           alpha = 0.3)
 
+## Polígono concavo ----
+
+concavo_fom <- fom_recortada |> 
+  sf::st_make_valid() |> 
+  dplyr::group_by(name_region) |> 
+  dplyr::summarise(geometry = geometry |> sf::st_union()) |> 
+  sf::st_concave_hull(ratio = 0.15)
+
+concavo_fom
+
+ggplot() +
+  geom_sf(data = fom_recortada, color = "forestgreen", fill = "forestgreen", 
+          alpha = 0.3) +
+  geom_sf(data = concavo_fom, color = "darkred", fill = NA)
+
 ## Resolução em graus para 10km ----
 
 res <- (10 * 1) / 111.3194 
