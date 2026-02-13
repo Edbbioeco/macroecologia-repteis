@@ -62,14 +62,14 @@ grade <- fom_recortada |>
   sf::st_make_valid() |> 
   dplyr::group_by(name_region) |> 
   dplyr::summarise(geometry = geometry |> sf::st_union()) |> 
-  sf::st_convex_hull() |>
+  sf::st_concave_hull(ratio = 0.15) |> 
   sf::st_make_grid(cellsize = res) |>
   sf::st_sf() |> 
   sf::st_join(fom_recortada |> 
                 sf::st_make_valid() |> 
                 dplyr::group_by(name_region) |> 
                 dplyr::summarise(geometry = geometry |> sf::st_union()) |> 
-                sf::st_convex_hull()) |> 
+                sf::st_concave_hull(ratio = 0.15)) |> 
   dplyr::filter(!name_region |> is.na()) |>
   dplyr::mutate(ID = paste0("c", dplyr::row_number()))
 
