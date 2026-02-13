@@ -70,7 +70,27 @@ gbif_occ
 
 ## Transformando em shapefile ----
 
+gbif_sf <- gbif_occ |> 
+  sf::st_as_sf(coords = c("decimalLongitude", "decimalLatitude"),
+               crs = 4674)
+
+gbif_sf
+
+ggplot() +
+  geom_sf(data = gbif_sf)
+
 ## Intersectando para a FOM ----
+
+gbif_sf_fom <- gbif_sf |> 
+  sf::st_intersection(grade |> 
+                        dplyr::summarise(geometry = geometry |> 
+                                           sf::st_union()))
+
+gbif_sf_fom
+
+ggplot() +
+  geom_sf(data = grade) +
+  geom_sf(data = gbif_sf_fom)
 
 # Matriz de composição ----
 
