@@ -52,6 +52,10 @@ purrr::map2(arquivo, classe, importar_ocorrencia)
 ls(pattern = "occ_") |> 
   mget(envir = globalenv())
 
+ls(pattern = "occ_") |> 
+  mget(envir = globalenv()) |> 
+  dplyr::glimpse()
+
 ### Unindo ----
 
 # Recortar para a FOM ----
