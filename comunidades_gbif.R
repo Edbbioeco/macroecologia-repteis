@@ -27,7 +27,7 @@ ggplot() +
 
 importar_ocorrencia <- function(arquivo, classe){
   
-  occ <- readr::read_csv2(arquivo)
+  occ <- readr::read_tsv("crocodylia_gbif.csv")
   
   assign(paste0("occ_", classe),
          occ,
@@ -48,6 +48,9 @@ classe
 purrr::map2(arquivo, classe, importar_ocorrencia)
 
 ### Visualizando ----
+
+ls(pattern = "occ_") |> 
+  mget(envir = globalenv())
 
 ### Unindo ----
 
