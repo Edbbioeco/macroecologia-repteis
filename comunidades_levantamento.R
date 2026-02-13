@@ -54,7 +54,7 @@ lev |> dplyr::glimpse()
 
 lev_trat <- lev |> 
   tidyr::pivot_longer(cols = dplyr::where(is.numeric),
-                      values_to = "presence",
+                      values_to = "Presence",
                       names_to = "city")
 
 lev_trat
@@ -63,13 +63,42 @@ lev_trat
 
 ## Coordenadas das cidades ----
 
+coord_cidades <- cidades |> 
+  dplyr::filter(name_muni %in% unique(lev_trat$city)) |> 
+  sf::st_centroid() |> 
+  sf::st_coordinates() |> 
+  as.data.frame() |> 
+  dplyr::rename("Longitude" = X,
+                "Latitude" = Y) |> 
+  dplyr::mutate(city = unique(lev_trat$city))
+
+coord_cidades
+
 ## Transformando os pontos em shapefile ----
 
-## Intersecção com a FOM ----
+lev_sf <- lev_trat |> 
+  dplyr::left_join(coord_cidades,
+                   by = "city") |> 
+  sf::st_as_sf(coords = c("Longitude", "Latitude"),
+               crs = 4674)
+
+lev_sf
+
+ggplot() +
+  geom_sf(data = grade) +
+  geom_sf(data = lev_sf)
 
 # Matriz de composição ----
 
 ## Montando a matriz ----
+
+lev_registros <- lev_sf |> 
+  sf::st_join(grade) |> 
+  as.data.frame() |> 
+  dplyr::select(ID, Especies, Presence) |> 
+  dplyr::filter(Presence == 1)
+
+lev_registros
 
 ## Exportando ----
 
