@@ -40,10 +40,18 @@ occ_specieslink |>  dplyr::glimpse()
 ## Transformando em shapefile ----
 
 specieslink_sf <- occ_specieslink |> 
-  dplyr::filter(!decimalLongitude |> is.na() &
-                  !decimalLatitude |> is.na() &
-                  !Species |> is.na()) |> 
-  sf::st_as_sf(coords = c("decimalLongitude", "decimalLatitude"),
+  dplyr::filter(!longitude |> is.na() &
+                  !latitude |> is.na() &
+                  !scientificname |> is.na() &
+                  !scientificname |> 
+                  stringr::str_detect(" sp$| sp.$| sp,$| sp | aff| cf,") &
+                  !scientificname |>
+                  stringr::str_count(stringr::boundary("word")) == 1) |> 
+  dplyr::mutate(latitude = latitude |> as.numeric(),
+                scientificname = scientificname |> 
+                  stringr::str_replace("^(\\S+\\s+\\S+)\\s+\\S+(.*)", 
+                                       "\\1\\2")) |> 
+  sf::st_as_sf(coords = c("longitude", "latitude"),
                crs = 4674)
 
 specieslink_sf
@@ -69,7 +77,7 @@ ggplot() +
 ## Lista de espécies ----
 
 specieslink_sf_fom |> 
-  dplyr::pull(Species) |> 
+  dplyr::pull(scientificname) |> 
   unique()
 
 ## tratando as espécies ----
