@@ -61,9 +61,9 @@ concavo_fom <- fom_recortada |>
 concavo_fom
 
 ggplot() +
+  geom_sf(data = concavo_fom, color = "darkred", fill = "red", alpha = 0.3) +
   geom_sf(data = fom_recortada, color = "forestgreen", fill = "forestgreen", 
-          alpha = 0.3) +
-  geom_sf(data = concavo_fom, color = "darkred", fill = NA)
+          alpha = 0.3)
 
 ## Resolução em graus para 10km ----
 
