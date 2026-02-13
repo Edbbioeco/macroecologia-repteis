@@ -27,7 +27,7 @@ ggplot() +
 
 importar_ocorrencia <- function(arquivo, classe){
   
-  occ <- readr::read_tsv("crocodylia_gbif.csv")
+  occ <- readr::read_tsv(arquivo)
   
   assign(paste0("occ_", classe),
          occ,
