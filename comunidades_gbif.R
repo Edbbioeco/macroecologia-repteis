@@ -1,16 +1,51 @@
 # Pacotes ----
 
+library(sf)
+
+library(tidyverse)
+
+library(writexl)
+
 # Dados ----
 
 ## Shapefile da grade ----
 
 ### Importando ----
 
+grade <- sf::st_read("grade_fom.shp")
+
 ### Visualizando ----
+
+grade
+
+ggplot() +
+  geom_sf(data = grade)
 
 ## Registros de ocorrência ----
 
 ### Importando ----
+
+importar_ocorrencia <- function(arquivo, classe){
+  
+  occ <- readr::read_csv2(arquivo)
+  
+  assign(paste0("occ_", classe),
+         occ,
+         envir = globalenv())
+  
+}
+
+arquivo <- list.files(pattern = "_gbif.csv")
+
+arquivo
+
+classe <- arquivo |> 
+  stringr::str_replace("_", " ") |> 
+  stringr::word(1)
+
+classe
+
+purrr::map2(arquivo, classe, importar_ocorrencia)
 
 ### Visualizando ----
 
