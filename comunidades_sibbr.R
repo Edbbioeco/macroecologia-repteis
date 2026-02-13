@@ -37,34 +37,37 @@ occ_sibbr |>  dplyr::glimpse()
 
 ## Transformando em shapefile ----
 
-gbif_sf <- gbif_occ |> 
+sibbr_sf <- occ_sibbr |> 
+  dplyr::filter(!decimalLongitude |> is.na() &
+                  !decimalLatitude |> is.na() &
+                  !Species |> is.na()) |> 
   sf::st_as_sf(coords = c("decimalLongitude", "decimalLatitude"),
                crs = 4674)
 
-gbif_sf
+sibbr_sf
 
 ggplot() +
-  geom_sf(data = gbif_sf)
+  geom_sf(data = sibbr_sf)
 
 ## Intersectando para a FOM ----
 
-gbif_sf_fom <- gbif_sf |> 
+sibbr_sf_fom <- sibbr_sf |> 
   sf::st_intersection(grade |> 
                         dplyr::summarise(geometry = geometry |> 
                                            sf::st_union()))
 
-gbif_sf_fom
+sibbr_sf_fom
 
 ggplot() +
   geom_sf(data = grade) +
-  geom_sf(data = gbif_sf_fom)
+  geom_sf(data = sibbr_sf_fom)
 
 # Matriz de composição ----
 
 ## Lista de espécies ----
 
-gbif_sf_fom |> 
-  dplyr::pull(species) |> 
+sibbr_sf_fom |> 
+  dplyr::pull(Species) |> 
   unique()
 
 ## tratando as espécies ----
