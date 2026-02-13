@@ -4,6 +4,8 @@ library(sf)
 
 library(tidyverse)
 
+library(sf)
+
 library(writexl)
 
 # Dados ----
