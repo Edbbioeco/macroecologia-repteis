@@ -58,6 +58,14 @@ ls(pattern = "occ_") |>
 
 ### Unindo ----
 
+gbif_occ <- ls(pattern = "occ_") |> 
+  mget(envir = globalenv()) |> 
+  dplyr::bind_rows() |> 
+  dplyr::select(class, species, decimalLongitude, decimalLatitude) |> 
+  tidyr::drop_na()
+
+gbif_occ
+
 # Recortar para a FOM ----
 
 ## Transformando em shapefile ----
