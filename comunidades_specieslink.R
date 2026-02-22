@@ -117,7 +117,8 @@ specieslink_sf_fom <- specieslink_sf_fom |>
       "Clelia plúmbea", 
       "Xenodon biligonigerus")      ~ NA_character_,
     .default = scientificname
-  ))
+  )) |> 
+  dplyr::filter(!scientificname |> is.na())
 
 specieslink_sf_fom
 
@@ -134,4 +135,4 @@ specieslink_registros
 
 ## Exportando ----
 
-sibbr_registros |> writexl::write_xlsx("registros_sibbr.xslx")
+specieslink_registros |> writexl::write_xlsx("registros_specieslink.xslx")
