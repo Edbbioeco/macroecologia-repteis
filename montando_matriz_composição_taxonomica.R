@@ -45,8 +45,14 @@ comunidades
 
 ## Montando a matriz ----
 
-comunidades |> 
+comunidades_trat <- comunidades |> 
   tidyr::pivot_wider(names_from = Especies,
                      values_from = Presence,
                      values_fill = 0,
                      values_fn = max)
+
+comunidades_trat
+
+## Exportando ----
+
+comunidades_trat |> writexl::write_xlsx("comunidades_taxonomicas.xlsx")
