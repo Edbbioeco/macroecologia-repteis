@@ -126,4 +126,4 @@ sibbr_registros
 
 ## Exportando ----
 
-sibbr_registros |> writexl::write_xlsx("registros_sibbr.xslx")
+sibbr_registros |> writexl::write_xlsx("registros_sibbr.xlsx")
