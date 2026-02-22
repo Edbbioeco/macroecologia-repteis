@@ -158,4 +158,4 @@ gbif_registros
 
 ## Exportando ----
 
-gbif_registros |> writexl::write_xlsx("registros_gbif.xslx")
+gbif_registros |> writexl::write_xlsx("registros_gbif.xlsx")
