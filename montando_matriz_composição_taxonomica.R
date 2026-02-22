@@ -35,8 +35,10 @@ ls(pattern = "comunidade_") |>
 
 ## Unindo ----
 
-ls(pattern = "comunidade_") |> 
+comunidades <- ls(pattern = "comunidade_") |> 
   mget(envir = globalenv()) |> 
   dplyr::bind_rows()
+
+comunidades
 
 # Matriz de composição taxonomica ----
