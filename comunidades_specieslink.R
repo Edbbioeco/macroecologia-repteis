@@ -135,4 +135,4 @@ specieslink_registros
 
 ## Exportando ----
 
-specieslink_registros |> writexl::write_xlsx("registros_specieslink.xslx")
+specieslink_registros |> writexl::write_xlsx("registros_specieslink.xlsx")
