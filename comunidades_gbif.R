@@ -145,4 +145,17 @@ gbif_sf_fom
 
 ## Montando a matriz de composição ----
 
+## Montando a matriz ----
+
+gbif_registros <- gbif_sf_fom |> 
+  sf::st_join(grade) |> 
+  as.data.frame() |> 
+  dplyr::mutate(Especies = species,
+                Presence =  1) |> 
+  dplyr::select(ID, Especies, Presence) 
+
+gbif_registros
+
 ## Exportando ----
+
+gbif_registros |> writexl::write_xlsx("registros_gbif.xslx")
