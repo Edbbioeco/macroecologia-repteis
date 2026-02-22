@@ -42,3 +42,11 @@ comunidades <- ls(pattern = "comunidade_") |>
 comunidades
 
 # Matriz de composição taxonomica ----
+
+## Montando a matriz ----
+
+comunidades |> 
+  tidyr::pivot_wider(names_from = Especies,
+                     values_from = Presence,
+                     values_fill = 0,
+                     values_fn = max)
