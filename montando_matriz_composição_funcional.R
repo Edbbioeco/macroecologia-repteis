@@ -4,7 +4,7 @@ library(tidyverse)
 
 library(readxl)
 
-library(writxl)
+library(writexl)
 
 # Dados ----
 
@@ -60,6 +60,8 @@ reptrat
 ## Conferindo as especies que não estão na base de dados ----
 
 sps <- comunidades |> dplyr::pull(Especies) |> unique()
+
+sps
 
 sps2 <- reptrat |> 
   dplyr::filter(Species %in% sps) |> 
