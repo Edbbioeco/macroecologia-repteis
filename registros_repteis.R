@@ -79,9 +79,9 @@ gbif_trat <- gbif |>
   dplyr::filter(!species |> is.na() &
                   !Latitude |> is.na() &
                   !Longitude |> is.na()) |> 
-  dplyr::select(species:Longitude) |> 
+  dplyr::select(species, Latitude:Longitude) |> 
   sf::st_as_sf(coords = c("Longitude", "Latitude"),
-               crs = cidades |> sf::st_crs())
+               crs = fom |> sf::st_crs())
 
 gbif_trat
 
