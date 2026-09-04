@@ -31,10 +31,10 @@ fom <- sf::st_read("./fom.shp")
 
 ### Visualizando ----
 
-cidades
+fom
 
 ggplot() +
-  geom_sf(data = cidades, color = "black")
+  geom_sf(data = fom, color = "black")
 
 ## GBIF ----
 
