@@ -168,7 +168,7 @@ sibbr_trat <- sibbr |>
                   .default = Latitude)) |> 
   tidyr::drop_na() |> 
   sf::st_as_sf(coords = c("Longitude", "Latitude"),
-               crs = cidades |> sf::st_crs())
+               crs = fom |> sf::st_crs())
 
 sibbr_trat
 
