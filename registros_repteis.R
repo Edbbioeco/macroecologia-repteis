@@ -114,7 +114,7 @@ specieslink_trat <- specieslink |>
                   !Longitude |> is.na()) |> 
   dplyr::select(c(species, Longitude:Latitude)) |> 
   sf::st_as_sf(coords = c("Longitude", "Latitude"),
-               crs = cidades |> sf::st_crs())
+               crs = fom |> sf::st_crs())
 
 specieslink_trat
 
