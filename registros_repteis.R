@@ -23,19 +23,11 @@ br
 ggplot() +
   geom_sf(data = br, color = "black")
 
-## Cidades ----
+## Florestas Umbrófilas mistas ----
 
 ### Importando ----
 
-cidades <- geobr::read_municipality(year = 2019) |> 
-  dplyr::filter(name_muni %in% c("Campina Do Simão", 
-                                 "Candói", 
-                                 "Cantagalo", 
-                                 "Goioxim", 
-                                 "Guarapuava", 
-                                 "Pinhão",
-                                 "Turvo"),
-                abbrev_state == "PR")
+fom <- sf::st_read("./fom.shp")
 
 ### Visualizando ----
 
