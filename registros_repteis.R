@@ -57,6 +57,8 @@ gbif <- readr::read_csv2("gbif.csv")
 
 gbif 
 
+gbif |> dplyr::glimpse()
+
 ### Tratando -----
 
 gbif_trat <- gbif |> 
