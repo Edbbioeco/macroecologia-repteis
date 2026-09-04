@@ -189,10 +189,10 @@ coords
 ## Shapefile ----
 
 especies <- coords |> 
-  sf::st_join(fom,
+  sf::st_join(fom_con |> 
+                sf::st_as_sf(),
               join = st_intersects) |> 
-  dplyr::select(name_muni, species) |> 
-  tidyr::drop_na()
+  dplyr::select(species) 
 
 especies
 
