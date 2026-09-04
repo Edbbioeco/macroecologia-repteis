@@ -189,9 +189,9 @@ coords
 ## Shapefile ----
 
 especies <- coords |> 
-  sf::st_join(fom_con |> 
-                sf::st_as_sf(),
-              join = st_intersects) |> 
+  sf::st_intersection(fom_con |> 
+                        sf::st_as_sf()) |> 
+  tidyr::drop_na() |> 
   dplyr::select(species) 
 
 especies
