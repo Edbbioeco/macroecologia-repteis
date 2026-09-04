@@ -197,7 +197,8 @@ especies <- coords |>
 especies
 
 ggplot() +
-  geom_sf(data = cidades, color = "black") +
+  geom_sf(data = fom_con |> 
+            sf::st_as_sf(), color = "black") +
   geom_sf(data = especies)
 
 ## Lista de espécies ----
