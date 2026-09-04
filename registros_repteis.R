@@ -64,27 +64,18 @@ gbif |> dplyr::glimpse()
 gbif_trat <- gbif |> 
   dplyr::rename("Longitude" = decimalLongitude,
                 "Latitude" = decimalLatitude) |> 
-  dplyr::mutate(Longitude = Longitude  |> 
-                  stringr::str_replace("^(-?\\d{2})(\\d+)$", "\\1.\\2") |>
-                  as.numeric(),
-                Longitude = dplyr::case_when(
-                  Longitude >= 0 ~ Longitude * -1,
-                  .default = Longitude),
-                Latitude = case_when(
-                  stringr::str_detect(as.character(Latitude), 
-                                      "^(-?[1-2])") ~ str_replace(
-                                        as.character(Latitude), 
-                                        "^(-?\\d{2})(\\d+)$", "\\1.\\2"),
-                  stringr::str_detect(
-                    as.character(Latitude), 
-                    "^(-?[3-9])") ~ stringr::str_replace(
-                      as.character(Latitude), 
-                      "^(-?\\d{1})(\\d+)$", "\\1.\\2"),
-                  TRUE ~ as.character(Latitude)) |>
-                  as.numeric(),
-                Latitude = dplyr::case_when(
-                  Latitude >= 0 ~ Latitude * -1,
-                  .default = Latitude)) |> 
+  dplyr::mutate(dplyr::across(
+    .cols = dplyr::contains("tude"),
+    .fns = ~.x |> 
+      as.character() |> 
+      (\(x){
+        
+        paste0(stringr::str_sub(x, 1, 3), 
+               ".", 
+               stringr::str_sub(x, 4))
+        
+        })() |> 
+      as.numeric())) |> 
   dplyr::filter(!species |> is.na() &
                   !Latitude |> is.na() &
                   !Longitude |> is.na()) |> 
