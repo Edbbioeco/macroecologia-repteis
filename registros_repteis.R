@@ -212,11 +212,13 @@ especies |>
 ## Exportando -----
 
 especies |> 
-  dplyr::rename("Município" = name_muni,
-                "Espécie" = species) |> 
   dplyr::mutate(Presença = 1) |> 
   as.data.frame() |> 
-  dplyr::select(1:2, 4) |> 
-  
+  dplyr::bind_cols(especies |> 
+                     sf::st_coordinates() |> 
+                     as.data.frame() |> 
+                     dplyr::rename("Longitude" = 1,
+                                   "Latitude" = 2)) |> 
+  dplyr::select(1, 3:5) |> 
   writexl::write_xlsx("matriz_registros.xlsx")
 
