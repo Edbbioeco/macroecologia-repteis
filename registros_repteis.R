@@ -36,6 +36,17 @@ fom
 ggplot() +
   geom_sf(data = fom, color = "black")
 
+## Gerar um polígono côncavo ----
+
+fom_con <- fom |> 
+  sf::st_union() |> 
+  sf::st_concave_hull(ratio = 0.45)
+
+fom_con
+
+ggplot() +
+  geom_sf(data = fom_con, color = "black")
+
 ## GBIF ----
 
 ### Importando ----
