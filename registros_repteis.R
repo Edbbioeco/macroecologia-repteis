@@ -67,14 +67,24 @@ gbif_trat <- gbif |>
   dplyr::mutate(Longitude = Longitude  |> 
                   stringr::str_replace("^(-?\\d{2})(\\d+)$", "\\1.\\2") |>
                   as.numeric(),
-                Longitude = dplyr::case_when(Longitude >= 0 ~ Longitude * -1,
-                                             .default = Longitude),
-                Latitude = case_when(stringr::str_detect(as.character(Latitude), "^(-?[1-2])") ~ str_replace(as.character(Latitude), "^(-?\\d{2})(\\d+)$", "\\1.\\2"),
-                                     stringr::str_detect(as.character(Latitude), "^(-?[3-9])") ~ stringr::str_replace(as.character(Latitude), "^(-?\\d{1})(\\d+)$", "\\1.\\2"),
-                                     TRUE ~ as.character(Latitude)) |>
+                Longitude = dplyr::case_when(
+                  Longitude >= 0 ~ Longitude * -1,
+                  .default = Longitude),
+                Latitude = case_when(
+                  stringr::str_detect(as.character(Latitude), 
+                                      "^(-?[1-2])") ~ str_replace(
+                                        as.character(Latitude), 
+                                        "^(-?\\d{2})(\\d+)$", "\\1.\\2"),
+                  stringr::str_detect(
+                    as.character(Latitude), 
+                    "^(-?[3-9])") ~ stringr::str_replace(
+                      as.character(Latitude), 
+                      "^(-?\\d{1})(\\d+)$", "\\1.\\2"),
+                  TRUE ~ as.character(Latitude)) |>
                   as.numeric(),
-                Latitude = dplyr::case_when(Latitude >= 0 ~ Latitude * -1,
-                                             .default = Latitude)) |> 
+                Latitude = dplyr::case_when(
+                  Latitude >= 0 ~ Latitude * -1,
+                  .default = Latitude)) |> 
   dplyr::filter(!species |> is.na() &
                   !Latitude |> is.na() &
                   !Longitude |> is.na()) |> 
