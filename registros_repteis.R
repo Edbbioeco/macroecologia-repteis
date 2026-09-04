@@ -180,11 +180,7 @@ ggplot() +
 
 coords <- ls(pattern = "_trat") |> 
   mget(envir = globalenv()) |> 
-  dplyr::bind_rows() |>
-  tidyr::drop_na() |> 
-  dplyr::mutate(coord = sf::st_as_text(geometry)) |>      
-  dplyr::distinct(coord, .keep_all = TRUE) |>    
-  dplyr::select(-coord)
+  dplyr::bind_rows()
 
 coords
 
@@ -193,7 +189,7 @@ coords
 ## Shapefile ----
 
 especies <- coords |> 
-  sf::st_join(cidades,
+  sf::st_join(fom,
               join = st_intersects) |> 
   dplyr::select(name_muni, species) |> 
   tidyr::drop_na()
