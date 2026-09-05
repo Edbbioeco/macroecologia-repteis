@@ -67,18 +67,6 @@ gbif |> dplyr::glimpse()
 gbif_trat <- gbif |> 
   dplyr::rename("Longitude" = decimalLongitude,
                 "Latitude" = decimalLatitude) |> 
-  dplyr::mutate(dplyr::across(
-    .cols = dplyr::contains("tude"),
-    .fns = ~.x |> 
-      as.character() |> 
-      (\(x){
-        
-        paste0(stringr::str_sub(x, 1, 3), 
-               ".", 
-               stringr::str_sub(x, 4))
-        
-        })() |> 
-      as.numeric())) |> 
   dplyr::filter(!species |> is.na() &
                   !Latitude |> is.na() &
                   !Longitude |> is.na()) |> 
