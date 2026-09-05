@@ -118,7 +118,11 @@ specieslink_sf_fom <- specieslink_sf_fom |>
       "Xenodon biligonigerus")      ~ NA_character_,
     .default = scientificname
   )) |> 
-  dplyr::filter(!scientificname |> is.na())
+  dplyr::filter(!scientificname |> is.na() &
+                  !scientificname |> stringr::str_detect("sp|sp.") &
+                  !scientificname |> 
+                  stringr::str_trim() |> 
+                  stringr::str_count("\\S+") == 1)
 
 specieslink_sf_fom
 
