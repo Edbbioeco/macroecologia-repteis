@@ -161,7 +161,7 @@ sibbr_sf_fom
 sibbr_registros <- sibbr_sf_fom |> 
   sf::st_join(grade) |> 
   as.data.frame() |> 
-  dplyr::mutate(Especies = Species,
+  dplyr::mutate(Especies = species,
                 Presence =  1) |> 
   dplyr::select(ID, Especies, Presence) 
 
