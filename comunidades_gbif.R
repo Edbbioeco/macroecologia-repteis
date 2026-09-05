@@ -110,7 +110,10 @@ gbif_sf_fom <- gbif_sf_fom |>
     .default = species
   )) |> 
   dplyr::filter(!species |> is.na() &
-                  !species |> stringr::str_detect("sp|sp."))
+                  !species |> stringr::str_detect("sp|sp.") &
+                  !species |> 
+                  stringr::str_trim() |> 
+                  stringr::str_count("\\S+") == 1)
 
 gbif_sf_fom
 
