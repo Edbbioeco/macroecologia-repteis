@@ -113,8 +113,8 @@ sibbr_sf_fom |>
 ## tratando as espécies ----
 
 sibbr_sf_fom <- sibbr_sf_fom |> 
-  dplyr::mutate(Species = dplyr::case_match(
-    Species,
+  dplyr::mutate(species = dplyr::case_match(
+    species,
     "Tomodon dorsatum"             ~ "Tomodon dorsatus",
     "Tupinambis merianae"          ~ "Salvator marianae",
     "Mabuya frenata"               ~ "Notomabuya frenata",
