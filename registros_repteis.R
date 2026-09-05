@@ -40,7 +40,7 @@ ggplot() +
 
 fom_con <- fom |> 
   sf::st_union() |> 
-  sf::st_concave_hull(ratio = 0.45)
+  sf::st_concave_hull(ratio = 0.05)
 
 fom_con
 
