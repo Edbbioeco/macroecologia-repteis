@@ -27,27 +27,9 @@ ggplot() +
 
 ### Importando ----
 
-importar_ocorrencia <- function(arquivo, classe){
-  
-  occ <- readr::read_tsv(arquivo)
-  
-  assign(paste0("occ_", classe),
-         occ,
-         envir = globalenv())
-  
-}
-
-arquivo <- list.files(pattern = "_gbif.csv")
-
-arquivo
-
-classe <- arquivo |> 
-  stringr::str_replace("_", " ") |> 
-  stringr::word(1)
-
-classe
-
-purrr::map2(arquivo, classe, importar_ocorrencia)
+gbif <- readr::read_tsv("gbif.csv",
+                        quote = "",
+                        na = "")
 
 ### Visualizando ----
 
