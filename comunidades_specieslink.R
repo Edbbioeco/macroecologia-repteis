@@ -132,8 +132,9 @@ specieslink_registros <- specieslink_sf_fom |>
   sf::st_join(grade) |> 
   as.data.frame() |> 
   dplyr::mutate(Especies = scientificname,
-                Presence =  1) |> 
-  dplyr::select(ID, Especies, Presence) 
+                Presence =  1,
+                Family = family) |> 
+  dplyr::select(ID, Family, Especies, Presence) 
 
 specieslink_registros
 
