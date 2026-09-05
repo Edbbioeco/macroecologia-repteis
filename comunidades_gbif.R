@@ -76,27 +76,27 @@ gbif_sf_fom |>
 gbif_sf_fom <- gbif_sf_fom |> 
   dplyr::mutate(species = dplyr::case_match(
     species,
-    "Tomodon dorsatum"             ~ "Tomodon dorsatus",
-    "Tupinambis merianae"          ~ "Salvator marianae",
-    "Mabuya frenata"               ~ "Notomabuya frenata",
-    "Anisiolepis grilli"           ~ "Urostrophus grilli",
-    "Mabuya dorsivittata"          ~ "Aspronema dorsivittatum",
-    "Sibynomorphus neuwiedi"       ~ "Dipsas neuwiedi",
-    "Liotyphlops beui"             ~ "Liotyphlops ternetzii",
+    "Tomodon dorsatum" ~ "Tomodon dorsatus",
+    "Tupinambis merianae" ~ "Salvator marianae",
+    "Mabuya frenata" ~ "Notomabuya frenata",
+    "Anisiolepis grilli"  ~ "Urostrophus grilli",
+    "Mabuya dorsivittata" ~ "Aspronema dorsivittatum",
+    "Sibynomorphus neuwiedi" ~ "Dipsas neuwiedi",
+    "Liotyphlops beui" ~ "Liotyphlops ternetzii",
     "Amphisbaena darwini trachura" ~ "Amphisbaena darwinii",
-    "Pantodactylus schreibersii"   ~ "Cercosaura schreibersii",
-    "Bothrops neuwiedi diorus"     ~ "Bothrops neuwiedi",
-    "Mastigodryas bifossatus"      ~ "Palusophis bifossatus",
-    "Liophis miliaris"             ~ "Erythrolamprus miliaris",
-    "Sibynomorphus mikanii"        ~ "Dipsas mikanii",
-    "Liophis jaegeri"              ~ "Erythrolamprus jaegeri",
-    "Phalotris iheringii"          ~ "Phalotris lemniscatus",
-    "Thamnodynastes hypoconia"     ~ "Dryophylax hypoconia",
-    "Thamnodynastes strigatus"     ~ "Mesotes strigatus",
-    "Atractus taeniatus"           ~ "Atractus paraguayensis",
+    "Pantodactylus schreibersii" ~ "Cercosaura schreibersii",
+    "Bothrops neuwiedi diorus" ~ "Bothrops neuwiedi",
+    "Mastigodryas bifossatus" ~ "Palusophis bifossatus",
+    "Liophis miliaris" ~ "Erythrolamprus miliaris",
+    "Sibynomorphus mikanii" ~ "Dipsas mikanii",
+    "Liophis jaegeri" ~ "Erythrolamprus jaegeri",
+    "Phalotris iheringii" ~ "Phalotris lemniscatus",
+    "Thamnodynastes hypoconia" ~ "Dryophylax hypoconia",
+    "Thamnodynastes strigatus" ~ "Mesotes strigatus",
+    "Atractus taeniatus" ~ "Atractus paraguayensis",
     "Crotalus durissus terrificus" ~ "Crotalus durissus",
-    "Echinanthera affinis"         ~ "Dibernardia affinis",
-    "Bothrops newwiedi"            ~ "Bothrops neuwiedi",
+    "Echinanthera affinis" ~ "Dibernardia affinis",
+    "Bothrops newwiedi" ~ "Bothrops neuwiedi",
     c("Bothrops trigemina", 
       "Anolis philopunctatus", 
       "Lygophis lineatus", 
@@ -106,9 +106,11 @@ gbif_sf_fom <- gbif_sf_fom |>
       "Dipsas indica", 
       "Boiruna maculata", 
       "Clelia plúmbea", 
-      "Xenodon biligonigerus")      ~ NA_character_,
+      "Xenodon biligonigerus") ~ NA_character_,
     .default = species
-  ))
+  )) |> 
+  dplyr::filter(!species |> is.na() &
+                  !species |> stringr::str_detect("sp|sp."))
 
 gbif_sf_fom
 
