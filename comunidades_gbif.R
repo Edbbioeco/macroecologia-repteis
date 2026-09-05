@@ -33,22 +33,9 @@ gbif <- readr::read_tsv("gbif.csv",
 
 ### Visualizando ----
 
-ls(pattern = "occ_") |> 
-  mget(envir = globalenv())
+gbif 
 
-ls(pattern = "occ_") |> 
-  mget(envir = globalenv()) |> 
-  dplyr::glimpse()
-
-### Unindo ----
-
-gbif_occ <- ls(pattern = "occ_") |> 
-  mget(envir = globalenv()) |> 
-  dplyr::bind_rows() |> 
-  dplyr::select(class, species, decimalLongitude, decimalLatitude) |> 
-  tidyr::drop_na()
-
-gbif_occ
+gbif |> dplyr::glimpse()
 
 # Recortar para a FOM ----
 
