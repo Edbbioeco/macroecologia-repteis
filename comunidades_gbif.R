@@ -41,9 +41,9 @@ gbif |> dplyr::glimpse()
 
 ## Transformando em shapefile ----
 
-gbif_sf <- gbif_occ |> 
+gbif_sf <- gbif |> 
   sf::st_as_sf(coords = c("decimalLongitude", "decimalLatitude"),
-               crs = 4674)
+               crs = grade |> sf::st_crs())
 
 gbif_sf
 
