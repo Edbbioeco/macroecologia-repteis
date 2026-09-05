@@ -147,7 +147,12 @@ sibbr_sf_fom <- sibbr_sf_fom |>
       "Clelia plúmbea", 
       "Xenodon biligonigerus")      ~ NA_character_,
     .default = species
-  ))
+  )) |> 
+  dplyr::filter(!species |> is.na() &
+                  !species |> stringr::str_detect("sp|sp.") &
+                  !species |> 
+                  stringr::str_trim() |> 
+                  stringr::str_count("\\S+") == 1)
 
 sibbr_sf_fom
 
