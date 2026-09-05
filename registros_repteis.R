@@ -174,11 +174,21 @@ ggplot() +
 
 inaturalist <- readr::read_csv("inaturalist.csv")
 
-## Visualizar ----
+### Visualizar ----
 
 inaturalist
 
 inaturalist |> dplyr::glimpse()
+
+### Tratar ----
+
+inaturalist_trat <- inaturalist |> 
+  dplyr::select(longitude, latitude, scientific_name) |> 
+  dplyr::rename("species" = scientific_name) |> 
+  sf::st_as_sf(coords = c(1:2),
+               crs = fom |> sf::st_crs())
+
+inaturalist_trat
 
 # Unindo os dados ----
 
