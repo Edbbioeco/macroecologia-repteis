@@ -52,7 +52,7 @@ specieslink_sf <- occ_specieslink |>
                   stringr::str_replace("^(\\S+\\s+\\S+)\\s+\\S+(.*)", 
                                        "\\1\\2")) |> 
   sf::st_as_sf(coords = c("longitude", "latitude"),
-               crs = 4674)
+               crs = grade |> sf::st_crs())
 
 specieslink_sf
 
