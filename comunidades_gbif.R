@@ -125,8 +125,9 @@ gbif_registros <- gbif_sf_fom |>
   sf::st_join(grade) |> 
   as.data.frame() |> 
   dplyr::mutate(Especies = species,
-                Presence =  1) |> 
-  dplyr::select(ID, Especies, Presence) 
+                Presence =  1,
+                Family = family) |> 
+  dplyr::select(ID, Family, Especies, Presence) 
 
 gbif_registros
 
