@@ -38,7 +38,7 @@ sibbr |>  dplyr::glimpse()
 ### Tratando ----
 
 sibbr_trat <- sibbr |> 
-  dplyr::select(c(Species, decimalLongitude:decimalLatitude)) |> 
+  dplyr::select(c(family, Species, decimalLongitude:decimalLatitude)) |> 
   dplyr::rename("species" = Species,
                 "Longitude" = decimalLongitude,
                 "Latitude" = decimalLatitude) |> 
