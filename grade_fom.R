@@ -12,7 +12,7 @@ library(tidyverse)
 
 ### Importando ----
 
-br <- geobr::read_state()
+br <- geobr::read_state(year = 2025)
 
 ### Visualizando ----
 
@@ -73,18 +73,11 @@ res
 
 ## Gerando a grade -----
 
-grade <- fom_recortada |> 
-  sf::st_make_valid() |> 
-  dplyr::group_by(name_region) |> 
-  dplyr::summarise(geometry = geometry |> sf::st_union()) |> 
+grade <- concavo_fom |> 
   sf::st_concave_hull(ratio = 0.15) |> 
   sf::st_make_grid(cellsize = res) |>
   sf::st_sf() |> 
-  sf::st_join(fom_recortada |> 
-                sf::st_make_valid() |> 
-                dplyr::group_by(name_region) |> 
-                dplyr::summarise(geometry = geometry |> sf::st_union()) |> 
-                sf::st_concave_hull(ratio = 0.15)) |> 
+  sf::st_join(concavo_fom) |> 
   dplyr::filter(!name_region |> is.na()) |>
   dplyr::mutate(ID = paste0("c", dplyr::row_number()))
 
