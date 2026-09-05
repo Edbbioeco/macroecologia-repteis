@@ -45,7 +45,8 @@ fom_con <- fom |>
 fom_con
 
 ggplot() +
-  geom_sf(data = fom_con, color = "black")
+  geom_sf(data = fom_con, color = "black") +
+  geom_sf(data = fom, color = "black")
 
 ## GBIF ----
 
