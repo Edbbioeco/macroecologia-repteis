@@ -52,7 +52,9 @@ ggplot() +
 
 ### Importando ----
 
-gbif <- readr::read_csv2("gbif.csv")
+gbif <- readr::read_tsv("gbif.csv",
+                        quote = "",
+                        na = "")
 
 ### Visualizando ----
 
