@@ -77,12 +77,12 @@ sibbr_trat |>  dplyr::glimpse()
 
 ## Transformando em shapefile ----
 
-sibbr_sf <- occ_sibbr |> 
-  dplyr::filter(!decimalLongitude |> is.na() &
-                  !decimalLatitude |> is.na() &
-                  !Species |> is.na()) |> 
-  sf::st_as_sf(coords = c("decimalLongitude", "decimalLatitude"),
-               crs = 4674)
+sibbr_sf <- sibbr_trat |> 
+  dplyr::filter(!Longitude |> is.na() &
+                  !Latitude |> is.na() &
+                  !species |> is.na()) |> 
+  sf::st_as_sf(coords = c("Longitude", "Latitude"),
+               crs = grade |> sf::st_crs())
 
 sibbr_sf
 
