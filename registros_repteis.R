@@ -174,6 +174,12 @@ ggplot() +
 
 inaturalist <- readr::read_csv("inaturalist.csv")
 
+## Visualizar ----
+
+inaturalist
+
+inaturalist |> dplyr::glimpse()
+
 # Unindo os dados ----
 
 coords <- ls(pattern = "_trat") |> 
