@@ -107,7 +107,7 @@ ggplot() +
 ## Lista de espécies ----
 
 sibbr_sf_fom |> 
-  dplyr::pull(Species) |> 
+  dplyr::pull(species) |> 
   unique()
 
 ## tratando as espécies ----
