@@ -27,13 +27,13 @@ ggplot() +
 
 ### Importando ----
 
-occ_sibbr <- readr::read_csv2("sibbr.csv", quote = ";")
+sibbr <- readr::read_csv2("sibbr.csv", quote = ";")
 
 ### Visualizando ----
 
-occ_sibbr
+sibbr
 
-occ_sibbr |>  dplyr::glimpse()
+sibbr |>  dplyr::glimpse()
 
 # Recortar para a FOM ----
 
