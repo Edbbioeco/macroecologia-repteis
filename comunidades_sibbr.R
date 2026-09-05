@@ -146,7 +146,7 @@ sibbr_sf_fom <- sibbr_sf_fom |>
       "Boiruna maculata", 
       "Clelia plúmbea", 
       "Xenodon biligonigerus")      ~ NA_character_,
-    .default = Species
+    .default = species
   ))
 
 sibbr_sf_fom
