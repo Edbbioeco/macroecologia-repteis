@@ -117,7 +117,8 @@ ggplot() +
 
 ### Importando ----
 
-sibbr <- readr::read_csv2("sibbr.csv")
+sibbr <- readr::read_tsv("sibbr.csv",
+                         quote = "")
 
 ### Visualizando ----
 
@@ -166,6 +167,12 @@ sibbr_trat
 ggplot() +
   geom_sf(data = br, color = "black") +
   geom_sf(data = sibbr_trat, color = "black")
+
+## iNaturalist ----
+
+### Importar ----
+
+inaturalist <- readr::read_csv("inaturalist.csv")
 
 # Unindo os dados ----
 
