@@ -22,3 +22,9 @@ grade
 
 ggplot() +
   geom_sf(data = grade)
+
+## Registros de ocorrência ----
+
+### Importando ----
+
+inaturalist <- readr::read_csv("inaturalist.csv")
