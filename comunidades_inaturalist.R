@@ -125,3 +125,15 @@ inaturalist_sf_fom <- inaturalist_sf_fom |>
                   stringr::str_count("\\S+") == 1)
 
 inaturalist_sf_fom
+
+## Montando a matriz de composição ----
+
+inaturalist_registros <- inaturalist_sf_fom |> 
+  sf::st_join(grade) |> 
+  as.data.frame() |> 
+  dplyr::mutate(Especies = scientific_name,
+                Presence =  1,
+                Family = taxon_family_name) |> 
+  dplyr::select(ID, Family, Especies, Presence) 
+
+inaturalist_registros
