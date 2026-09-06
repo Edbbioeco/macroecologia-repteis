@@ -34,3 +34,27 @@ inaturalist <- readr::read_csv("inaturalist.csv")
 inaturalist
 
 inaturalist |> dplyr::glimpse()
+
+# Recortar para a FOM ----
+
+## Transformando em shapefile ----
+
+inaturalist_sf <- inaturalist |> 
+  dplyr::filter(!longitude |> is.na() &
+                  !latitude |> is.na() &
+                  !scientific_name |> is.na() &
+                  !scientific_name |> 
+                  stringr::str_detect(" sp$| sp.$| sp,$| sp | aff| cf,") &
+                  !scientific_name |>
+                  stringr::str_count(stringr::boundary("word")) == 1) |> 
+  dplyr::mutate(latitude = latitude |> as.numeric(),
+                scientific_name = scientific_name |> 
+                  stringr::str_replace("^(\\S+\\s+\\S+)\\s+\\S+(.*)", 
+                                       "\\1\\2")) |> 
+  sf::st_as_sf(coords = c("longitude", "latitude"),
+               crs = grade |> sf::st_crs())
+
+inaturalist_sf
+
+ggplot() +
+  geom_sf(data = inaturalist_sf)
