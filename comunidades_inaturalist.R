@@ -79,3 +79,49 @@ ggplot() +
 inaturalist_sf_fom |> 
   dplyr::pull(scientific_name) |> 
   unique()
+
+## tratando as espécies ----
+
+inaturalist_sf_fom <- inaturalist_sf_fom |> 
+  dplyr::mutate(scientific_name = dplyr::case_match(
+    scientific_name,
+    "Tomodon dorsatum" ~ "Tomodon dorsatus",
+    "Tupinambis merianae" ~ "Salvator marianae",
+    "Mabuya frenata" ~ "Notomabuya frenata",
+    "Anisiolepis grilli" ~ "Urostrophus grilli",
+    "Mabuya dorsivittata" ~ "Aspronema dorsivittatum",
+    "Sibynomorphus neuwiedi" ~ "Dipsas neuwiedi",
+    "Liotyphlops beui" ~ "Liotyphlops ternetzii",
+    "Amphisbaena darwini trachura" ~ "Amphisbaena darwinii",
+    "Pantodactylus schreibersii" ~ "Cercosaura schreibersii",
+    "Bothrops neuwiedi diorus" ~ "Bothrops neuwiedi",
+    "Mastigodryas bifossatus" ~ "Palusophis bifossatus",
+    "Liophis miliaris" ~ "Erythrolamprus miliaris",
+    "Sibynomorphus mikanii" ~ "Dipsas mikanii",
+    "Liophis jaegeri" ~ "Erythrolamprus jaegeri",
+    "Phalotris iheringii"  ~ "Phalotris lemniscatus",
+    "Thamnodynastes hypoconia" ~ "Dryophylax hypoconia",
+    "Thamnodynastes strigatus" ~ "Mesotes strigatus",
+    "Atractus taeniatus" ~ "Atractus paraguayensis",
+    "Crotalus durissus terrificus" ~ "Crotalus durissus",
+    "Echinanthera affinis" ~ "Dibernardia affinis",
+    "Bothrops newwiedi" ~ "Bothrops neuwiedi",
+    c("Bothrops trigemina", 
+      "Anolis philopunctatus", 
+      "Lygophis lineatus", 
+      "Tupinambis teguixin", 
+      "Bothrops neuwiedi paranaensis", 
+      "Heterodactylus imbricatus", 
+      "Dipsas indica", 
+      "Boiruna maculata", 
+      "Clelia plúmbea", 
+      "Xenodon biligonigerus")      ~ NA_character_,
+    .default = scientific_name
+  )) |> 
+  dplyr::filter(!scientific_name |> is.na() &
+                  !scientific_name |> stringr::str_detect("sp|sp.") &
+                  !scientific_name |> 
+                  stringr::str_trim() |> 
+                  stringr::str_count("\\S+") == 1)
+
+inaturalist_sf_fom
