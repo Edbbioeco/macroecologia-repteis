@@ -28,3 +28,9 @@ ggplot() +
 ### Importando ----
 
 inaturalist <- readr::read_csv("inaturalist.csv")
+
+### Visualizando ----
+
+inaturalist
+
+inaturalist |> dplyr::glimpse()
