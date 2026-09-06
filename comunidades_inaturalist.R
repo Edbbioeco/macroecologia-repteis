@@ -137,3 +137,7 @@ inaturalist_registros <- inaturalist_sf_fom |>
   dplyr::select(ID, Family, Especies, Presence) 
 
 inaturalist_registros
+
+## Exportando ----
+
+inaturalist_registros |> writexl::write_xlsx("registros_inaturalist.xlsx")
