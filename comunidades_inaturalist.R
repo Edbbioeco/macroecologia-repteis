@@ -71,3 +71,11 @@ inaturalist_sf_fom
 ggplot() +
   geom_sf(data = grade) +
   geom_sf(data = inaturalist_sf_fom)
+
+# Matriz de composição ----
+
+## Lista de espécies ----
+
+inaturalist_sf_fom |> 
+  dplyr::pull(scientific_name) |> 
+  unique()
