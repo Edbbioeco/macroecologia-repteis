@@ -113,3 +113,22 @@ ggplot() +
 
 ggsave(filename = "riqueza_fom.png",
        height = 10, width = 12)
+
+## Dissimilaridade das comunidades ----
+
+### Calcular a dissimilaridade global ----
+
+dis_global <- purrr::map_vec(
+  1:3,
+  \(id){
+    
+    indice <- comp |> 
+      tibble::column_to_rownames(var = "ID") |> 
+      betapart::beta.multi()
+    
+    indice[[id]]
+    
+    },
+  .progress = TRUE)
+
+dis_global
