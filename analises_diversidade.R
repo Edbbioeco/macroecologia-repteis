@@ -42,3 +42,19 @@ grade
 
 ggplot() +
   geom_sf(data = grade, color = "black")
+
+# Diversidade ----
+
+## Riqueza ----
+
+### Calcular riqueza ----
+
+riq <- comp |> 
+  tibble::column_to_rownames(var = "ID") |> 
+  vegan::specnumber() |> 
+  as.data.frame() |> 
+  tibble::rownames_to_column() |> 
+  dplyr::rename("ID" = 1,
+                "Richness" = 2)
+
+riq
