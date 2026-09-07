@@ -153,14 +153,15 @@ dis_par <- purrr::map2_dfr(
       reshape2::melt() |> 
       tidyr::drop_na() |> 
       dplyr::filter(Var1 != Var2) |> 
-      dplyr::rename("Dissimilarity" = 3) |> 
-      dplyr::mutate(Dissimilarity = Dissimilarity |> round(2),
+      dplyr::rename("Mean dissimilarity" = 3) |> 
+      dplyr::mutate(`Mean dissimilarity` = `Mean dissimilarity` |> 
+                      round(2),
                     Index = indice)
     
     },
   .progress = TRUE) |> 
   tidyr::pivot_wider(names_from = Index,
-                     values_from = Dissimilarity)
+                     values_from = `Mean dissimilarity`)
 
 dis_par
 
