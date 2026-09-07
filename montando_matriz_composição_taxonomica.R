@@ -34,6 +34,7 @@ comunidades |> dplyr::glimpse()
 ## Montando a matriz ----
 
 comunidades_trat <- comunidades |> 
+  dplyr::select(ID, Especies, Presence) |> 
   tidyr::pivot_wider(names_from = Especies,
                      values_from = Presence,
                      values_fill = 0,
