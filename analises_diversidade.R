@@ -8,8 +8,6 @@ library(sf)
 
 library(vegan)
 
-library(ggtext)
-
 library(ggview)
 
 library(betapart)
