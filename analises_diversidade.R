@@ -107,5 +107,6 @@ ggplot() +
   theme_bw() +
   theme(axis.text = element_text(size = 20, color = "black"),
         legend.text = element_text(size = 20, color = "black"),
-        legend.position = "bottom") +
+        legend.position = "bottom",
+        panel.border = element_rect(color = "black", linewidth = 1)) +
   ggview::canvas(height = 10, width = 12)
