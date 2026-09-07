@@ -18,6 +18,6 @@ library(flextable)
 
 ## Composição ----
 
-### Importando ----
+### Importar ----
 
 comp <- readxl::read_xlsx("comunidades_taxonomicas.xlsx")
