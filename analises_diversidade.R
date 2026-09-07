@@ -14,7 +14,7 @@ library(ggview)
 
 library(betapart)
 
-library(flextable)
+library(reshape2)
 
 # Dados ----
 
