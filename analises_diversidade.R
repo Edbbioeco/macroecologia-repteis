@@ -124,7 +124,7 @@ dis_global <- purrr::map_vec(
     
     indice <- comp |> 
       tibble::column_to_rownames(var = "ID") |> 
-      betapart::beta.multi()
+      betapart::beta.multi(index.family = "jaccard")
     
     indice[[id]]
     
