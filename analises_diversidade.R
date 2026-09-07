@@ -10,9 +10,9 @@ library(vegan)
 
 library(ggtext)
 
-library(betapart)
+library(ggview)
 
-library(ggdendro)
+library(betapart)
 
 library(flextable)
 
