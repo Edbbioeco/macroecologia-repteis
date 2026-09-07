@@ -82,12 +82,9 @@ ggplot() +
               fill = Richness |> log())) + 
   scale_color_viridis_c(na.value = "#440154FF",
                         guide = guide_colourbar(
-                          title = "Log<sub>10</sub> Richness",
+                          title = "Log Richness",
                           title.position = "top",
                           title.hjust = 0.5,
-                          title.theme = ggtext::element_markdown(
-                            size = 20, 
-                            color = "black"),
                           barwidth = 30,
                           barheight = 2,
                           frame.colour = "black",
@@ -95,12 +92,9 @@ ggplot() +
                         )) +
   scale_fill_viridis_c(na.value = "#440154FF",
                        guide = guide_colourbar(
-                         title = "Log<sub>10</sub> Richness",
+                         title = "Log Richness",
                          title.position = "top",
                          title.hjust = 0.5,
-                         title.theme = ggtext::element_markdown(
-                           size = 20, 
-                           color = "black"),
                          barwidth = 30,
                          barheight = 2,
                          frame.colour = "black",
@@ -109,6 +103,7 @@ ggplot() +
   theme_bw() +
   theme(axis.text = element_text(size = 20, color = "black"),
         legend.text = element_text(size = 20, color = "black"),
+        legend.title = element_text(size = 20, color = "black"),
         legend.position = "bottom",
         panel.border = element_rect(color = "black", linewidth = 1)) +
   ggview::canvas(height = 10, width = 12)
