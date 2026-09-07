@@ -137,7 +137,7 @@ dis_global
 
 dis_par <- purrr::map2_dfr(
   1:3,
-  c("Jaccard", "Nestdeness", "Turnover"),
+  c("Turnover", "Nestdeness", "Jaccard"),
   \(id, indice){
     
     dis <- comp |> 
@@ -163,7 +163,6 @@ dis_par <- purrr::map2_dfr(
                      values_from = Dissimilarity)
 
 dis_par
-
 
 ### Calcular a média por cada grid ----
 
