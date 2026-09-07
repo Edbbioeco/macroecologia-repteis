@@ -8,11 +8,11 @@ library(sf)
 
 library(vegan)
 
+library(ggtext)
+
 library(betapart)
 
 library(ggdendro)
-
-library(ggtext)
 
 library(flextable)
 
