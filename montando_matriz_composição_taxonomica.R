@@ -25,16 +25,9 @@ comunidades <- purrr::map_dfr(
 
 ## Visualizando ----
 
-ls(pattern = "comunidade_") |> 
-  mget(envir = globalenv())
-
-## Unindo ----
-
-comunidades <- ls(pattern = "comunidade_") |> 
-  mget(envir = globalenv()) |> 
-  dplyr::bind_rows()
-
 comunidades
+
+comunidades |> dplyr::glimpse()
 
 # Matriz de composição taxonomica ----
 
