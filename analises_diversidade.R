@@ -176,3 +176,18 @@ dis_par_trat <- dis_par |>
   dplyr::rename("ID" = 1)
 
 dis_par_trat
+
+### Adicionar os valores de dissimilaridade ao shapefile da grade ----
+
+grade <- grade |> 
+  dplyr::left_join(dis_par_trat,
+                   by = "ID") |> 
+  dplyr::mutate(dplyr::across(.cols = 4:6,
+                              .fns = ~dplyr::case_when(
+                                
+                                .x |> is.na() ~ 0,
+                                .default = .x
+                                
+                              )))
+
+grade
