@@ -132,3 +132,45 @@ dis_global <- purrr::map_vec(
   .progress = TRUE)
 
 dis_global
+
+### Calcular a dissimilaridade par-a-par ----
+
+dis_par <- purrr::map2_dfr(
+  1:3,
+  c("Jaccard", "Nestdeness", "Turnover"),
+  \(id, indice){
+    
+    dis <- comp |> 
+      tibble::column_to_rownames(var = "ID") |> 
+      betapart::beta.pair(index.family = "jaccard")
+    
+    dis_matrix <- dis[[id]] |> 
+      as.matrix()
+    
+    dis_matrix[upper.tri(dis_matrix)] <- NA
+    
+    dis_matrix |> 
+      reshape2::melt() |> 
+      tidyr::drop_na() |> 
+      dplyr::filter(Var1 != Var2) |> 
+      dplyr::rename("Dissimilarity" = 3) |> 
+      dplyr::mutate(Dissimilarity = Dissimilarity |> round(2),
+                    Index = indice)
+    
+    },
+  .progress = TRUE) |> 
+  tidyr::pivot_wider(names_from = Index,
+                     values_from = Dissimilarity)
+
+dis_par
+
+
+### Calcular a média por cada grid ----
+
+dis_par_trat <- dis_par |> 
+  dplyr::summarise(dplyr::across(.cols = dplyr::where(is.numeric),
+                                 .fns = ~.x |> mean()),
+                   .by = Var1) |> 
+  dplyr::rename("ID" = 1)
+
+dis_par_trat
