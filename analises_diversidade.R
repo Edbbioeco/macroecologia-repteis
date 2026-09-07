@@ -191,3 +191,56 @@ grade <- grade |>
                               )))
 
 grade
+
+### Mapas ----
+
+mapas_dis <- purrr::map(
+  c("Jaccard", "Turnover", "Nestdeness"),
+  \(indice){
+    
+    ggplot() +
+      geom_sf(data = grade,
+              aes(color = .data[[indice]],
+                  fill = .data[[indice]])) +
+      scale_color_viridis_c(na.value = "#440154FF",
+                            guide = guide_colourbar(
+                              title = paste0(indice, 
+                                             " mean dissimilarity"),
+                              title.position = "top",
+                              title.hjust = 0.5,
+                              barwidth = 25,
+                              barheight = 2,
+                              frame.colour = "black",
+                              ticks.colour = "black"
+                            )) +
+      scale_fill_viridis_c(na.value = "#440154FF",
+                           guide = guide_colourbar(
+                             title = paste0(indice, 
+                                            " mean dissimilarity"),
+                             title.position = "top",
+                             title.hjust = 0.5,
+                             barwidth = 25,
+                             barheight = 2,
+                             frame.colour = "black",
+                             ticks.colour = "black"
+                           )) +
+      labs(title = indice) +
+      theme_bw() +
+      theme(axis.text = element_text(size = 20, color = "black"),
+            legend.text = element_text(size = 20, color = "black"),
+            legend.title = element_text(size = 20,  color = "black"),
+            legend.position = "bottom",
+            panel.border = element_rect(color = "black", linewidth = 1),
+            plot.title = element_text(size = 30, color = "black", 
+                                      hjust = 0.5)) +
+      ggview::canvas(height = 10, width = 12)
+    
+    },
+  .progress = TRUE) |> 
+  patchwork::wrap_plots() +
+  ggview::canvas(height = 10, width = 20)
+
+mapas_dis
+
+ggsave(filename = "dissimilaridade_fom.png",
+       height = 10, width = 20)
