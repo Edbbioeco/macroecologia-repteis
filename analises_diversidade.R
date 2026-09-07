@@ -158,6 +158,8 @@ dis_par <- purrr::map2_dfr(
                     Index = indice)
     
     },
-  .progress = TRUE)
+  .progress = TRUE) |> 
+  tidyr::pivot_wider(names_from = Index,
+                     values_from = Dissimilarity)
 
 dis_par
