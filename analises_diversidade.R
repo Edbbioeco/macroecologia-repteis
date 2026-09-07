@@ -58,3 +58,16 @@ riq <- comp |>
                 "Richness" = 2)
 
 riq
+
+### Adicionar as informações de riqueza na grade ----
+
+grade <- grade |> 
+  dplyr::left_join(riq, by = "ID") |> 
+  dplyr::mutate(Richness = dplyr::case_when(
+    
+    Richness |> is.na() ~ 0,
+    .default = Richness
+    
+    ))
+
+grade
