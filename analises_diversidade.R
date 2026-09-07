@@ -71,3 +71,41 @@ grade <- grade |>
     ))
 
 grade
+
+### Visualizar ----
+
+ggplot() +
+  geom_sf(data = grade, 
+          aes(color = Richness |> log(),
+              fill = Richness |> log())) + 
+  scale_color_viridis_c(na.value = "#440154FF",
+                        guide = guide_colourbar(
+                          title = "Log<sub>10</sub> Richness",
+                          title.position = "top",
+                          title.hjust = 0.5,
+                          title.theme = ggtext::element_markdown(
+                            size = 20, 
+                            color = "black"),
+                          barwidth = 30,
+                          barheight = 2,
+                          frame.colour = "black",
+                          ticks.colour = "black"
+                        )) +
+  scale_fill_viridis_c(na.value = "#440154FF",
+                       guide = guide_colourbar(
+                         title = "Log<sub>10</sub> Richness",
+                         title.position = "top",
+                         title.hjust = 0.5,
+                         title.theme = ggtext::element_markdown(
+                           size = 20, 
+                           color = "black"),
+                         barwidth = 30,
+                         barheight = 2,
+                         frame.colour = "black",
+                         ticks.colour = "black"
+                       )) +
+  theme_bw() +
+  theme(axis.text = element_text(size = 20, color = "black"),
+        legend.text = element_text(size = 20, color = "black"),
+        legend.position = "bottom") +
+  ggview::canvas(height = 10, width = 12)
