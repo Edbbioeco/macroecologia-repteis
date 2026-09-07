@@ -110,3 +110,6 @@ ggplot() +
         legend.position = "bottom",
         panel.border = element_rect(color = "black", linewidth = 1)) +
   ggview::canvas(height = 10, width = 12)
+
+ggsave(filename = "riqueza_fom.png",
+       height = 10, width = 12)
