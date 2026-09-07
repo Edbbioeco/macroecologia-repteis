@@ -16,6 +16,8 @@ library(betapart)
 
 library(reshape2)
 
+library(patchwork)
+
 # Dados ----
 
 ## Composição ----
