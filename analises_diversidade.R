@@ -132,3 +132,32 @@ dis_global <- purrr::map_vec(
   .progress = TRUE)
 
 dis_global
+
+### Calcular a dissimilaridade par-a-par ----
+
+dis_par <- purrr::map2_dfr(
+  1:3,
+  c("Jaccard", "Nestdeness", "Turnover"),
+  \(id, indice){
+    
+    dis <- comp |> 
+      tibble::column_to_rownames(var = "ID") |> 
+      betapart::beta.pair(index.family = "jaccard")
+    
+    dis_matrix <- dis[[id]] |> 
+      as.matrix()
+    
+    dis_matrix[upper.tri(dis_matrix)] <- NA
+    
+    dis_matrix |> 
+      reshape2::melt() |> 
+      tidyr::drop_na() |> 
+      dplyr::filter(Var1 != Var2) |> 
+      dplyr::rename("Dissimilarity" = 3) |> 
+      dplyr::mutate(Dissimilarity = Dissimilarity |> round(2),
+                    Index = indice)
+    
+    },
+  .progress = TRUE)
+
+dis_par
