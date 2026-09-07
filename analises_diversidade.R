@@ -21,3 +21,15 @@ library(flextable)
 ### Importar ----
 
 comp <- readxl::read_xlsx("comunidades_taxonomicas.xlsx")
+
+### Visualizar ----
+
+comp
+
+comp |> dplyr::glimpse()
+
+## Grade das Florestas Ombrófilas Mistas ----
+
+### Importar ----
+
+grade <- sf::st_read("grade_fom.shp")
