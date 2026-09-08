@@ -51,3 +51,8 @@ ggplot() +
   geom_sf(data = fom, color = "darkgreen", fill = "darkgreen") +
   geom_sf(data = br, color = "black", fill = "transparent")
 
+# Shapefile da grade ----
+
+## Importar ----
+
+grade <- sf::st_read("grade_fom.shp")
