@@ -47,5 +47,6 @@ fom <- sf::st_read("fom.shp")
 fom
 
 ggplot() +
-  geom_sf(data = br, color = "black") +
-  geom_sf(data = fom, color = "forestgreen")
+  geom_sf(data = ma, color = "green", fill = "green") +
+  geom_sf(data = fom, color = "darkgreen", fill = "darkgreen") +
+  geom_sf(data = br, color = "black", fill = "transparent")
