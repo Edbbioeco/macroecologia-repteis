@@ -89,3 +89,23 @@ mapa_principal <- ggplot() +
   ggview::canvas(height = 10, width = 12)
 
 mapa_principal
+
+## Inset map ----
+
+inset_map <- ggplot() +
+  geom_sf(data = br, color = "black", fill = "white",
+          linewidth = 1) +
+  geom_sf(data = ma, color = "green", fill = "green") +
+  geom_sf(data = fom, color = "darkgreen", fill = "darkgreen") +
+  geom_sf(data = br, color = "black", fill = "transparent",
+          linewidth = 2) +
+  geom_rect(aes(xmin = -54.04717, xmax = -44.25722,
+                ymin = -30.36529, ymax = -22.56086),
+            color = "darkred",
+            fill = "red",
+            alpha = 0.5,
+            linewidth = 1) +
+  theme_void() +
+  ggview::canvas(height = 10, width = 12)
+
+inset_map
