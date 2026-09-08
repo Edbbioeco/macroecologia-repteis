@@ -109,3 +109,13 @@ inset_map <- ggplot() +
   ggview::canvas(height = 10, width = 12)
 
 inset_map
+
+## Mapa final ----
+
+cowplot::ggdraw(mapa_principal) +
+  cowplot::draw_plot(inset_map,
+                     x = 0.565,
+                     y = 0.2,
+                     height = 0.45,
+                     width = 0.45) +
+  ggview::canvas(height = 10, width = 12)
