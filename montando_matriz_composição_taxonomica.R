@@ -4,7 +4,7 @@ library(tidyverse)
 
 library(readxl)
 
-library(writxl)
+library(writexl)
 
 # Dados ----
 
