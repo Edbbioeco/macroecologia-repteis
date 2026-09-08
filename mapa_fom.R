@@ -21,6 +21,13 @@ br
 ggplot() +
   geom_sf(data = br, color = "black")
 
+# Shapefile da Mata Atlântica ----
+
+## Importar ----
+
+ma <- geobr::read_biomes(year = 2025) |> 
+  dplyr::filter(name_biome == "Mata Atlântica")
+
 # Shapefile das Florestas Ombrófilas Densas ----
 
 ## Importar ----
