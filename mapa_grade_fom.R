@@ -35,3 +35,10 @@ ma
 ggplot() +
   geom_sf(data = ma, color = "green", fill = "green") +
   geom_sf(data = br, color = "black", fill = "transparent")
+
+# Shapefile das Florestas Ombrófilas Densas ----
+
+## Importar ----
+
+fom <- sf::st_read("fom.shp")
+
