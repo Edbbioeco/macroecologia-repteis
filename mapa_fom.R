@@ -20,3 +20,9 @@ br
 
 ggplot() +
   geom_sf(data = br, color = "black")
+
+# Shapefile das Florestas Ombrófilas Densas ----
+
+## Importar ----
+
+fom <- sf::st_read("fom.shp")
