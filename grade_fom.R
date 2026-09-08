@@ -58,12 +58,12 @@ res
 
 ## Gerando a grade -----
 
-grade <- concavo_fom |> 
+grade <- fom_recortada |> 
   sf::st_concave_hull(ratio = 0.05) |> 
   sf::st_make_grid(cellsize = res) |>
   sf::st_sf() |> 
-  sf::st_join(concavo_fom) |> 
-  dplyr::filter(!name_region |> is.na()) |>
+  sf::st_join(fom_recortada) |> 
+  dplyr::filter(!id1 |> is.na()) |>
   dplyr::mutate(ID = paste0("c", dplyr::row_number()))
 
 grade 
