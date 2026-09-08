@@ -118,3 +118,6 @@ cowplot::ggdraw(mapa_principal) +
                      height = 0.45,
                      width = 0.45) +
   ggview::canvas(height = 10, width = 12)
+
+ggsave(filename = "mapa_fom.png",
+       height = 10, width = 12)
