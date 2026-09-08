@@ -26,7 +26,7 @@ ggplot() +
 ## Importar ----
 
 ma <- geobr::read_biomes(year = 2025) |> 
-  dplyr::filter(name_biome == "Mata Atlântica")(name_biome == "Mata Atlântica")
+  dplyr::filter(name_biome == "Mata Atlântica")
 
 ## Visualizar ----
 
@@ -56,3 +56,4 @@ ggplot() +
 ## Importar ----
 
 grade <- sf::st_read("grade_fom.shp")
+
