@@ -26,4 +26,12 @@ ggplot() +
 ## Importar ----
 
 ma <- geobr::read_biomes(year = 2025) |> 
-  dplyr::filter(name_biome == "Mata Atlântica")
+  dplyr::filter(name_biome == "Mata Atlântica")(name_biome == "Mata Atlântica")
+
+## Visualizar ----
+
+ma
+
+ggplot() +
+  geom_sf(data = ma, color = "green", fill = "green") +
+  geom_sf(data = br, color = "black", fill = "transparent")
