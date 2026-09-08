@@ -57,3 +57,14 @@ ggplot() +
 
 grade <- sf::st_read("grade_fom.shp")
 
+## Visualizar ----
+
+grade
+
+ggplot() +
+  geom_sf(data = ma, color = "green", fill = "green") +
+  geom_sf(data = fom, color = "darkgreen", fill = "darkgreen") +
+  geom_sf(data = grade, color = "black", fill = "transparent", 
+          linewidth  = 0.05) +
+  geom_sf(data = br, color = "black", fill = "transparent")
+
