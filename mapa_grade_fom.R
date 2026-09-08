@@ -7,3 +7,9 @@ library(tidyverse)
 library(sf)
 
 library(ggview)
+
+# Shapefile dos Estados do Brasil ----
+
+## Importar ----
+
+br <- geobr::read_state(year = 2025)
