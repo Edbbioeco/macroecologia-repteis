@@ -175,7 +175,7 @@ dis_par_trat
 grade <- grade |> 
   dplyr::left_join(dis_par_trat,
                    by = "ID") |> 
-  dplyr::mutate(dplyr::across(.cols = 4:6,
+  dplyr::mutate(dplyr::across(.cols = c(Turnover:Jaccard),
                               .fns = ~dplyr::case_when(
                                 
                                 .x |> is.na() ~ 0,
