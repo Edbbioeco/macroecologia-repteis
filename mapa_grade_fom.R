@@ -68,3 +68,49 @@ ggplot() +
           linewidth  = 0.05) +
   geom_sf(data = br, color = "black", fill = "transparent")
 
+# Mapa ----
+
+ggplot() +
+  geom_sf(data = br, 
+          aes(color = "Brazil", fill = "Brazil"),
+          linewidth = 1) +
+  geom_sf(data = ma, 
+          aes(color = "Atlantic Forest", fill = "Atlantic Forest")) +
+  geom_sf(data = fom, 
+          aes(color = "FOM", fill = "FOM")) +
+  geom_sf(data = br, color = "black", fill = "transparent", 
+          linewidth = 1) +
+  geom_sf(data = grade, 
+          aes(color = "Grid", fill = "Grid"), 
+          linewidth = 1) +
+  geom_sf(data = br, color = "black", fill = "transparent", 
+          linewidth = 1) +
+  coord_sf(xlim = c(-54.04717, -48),
+           ylim = c(-30, -23.5)) +
+  scale_color_manual(values = c("Brazil" = "black",
+                                "Atlantic Forest" = "green",
+                                "FOM" = "darkgreen",
+                                "Grid" = "orange"),
+                     breaks = c("Brazil", 
+                                "Atlantic Forest",
+                                "FOM",
+                                "Grid")) +
+  scale_fill_manual(values = c("Brazil" = "white",
+                               "Atlantic Forest" = "green",
+                               "FOM" = "darkgreen",
+                               "Grid" = "transparent"),
+                    breaks = c("Brazil", 
+                               "Atlantic Forest",
+                               "FOM",
+                               "Grid")) +
+  labs(color = NULL,
+       fill = NULL) +
+  theme_bw() +
+  theme(axis.text = element_text(color = "black", size = 20),
+        legend.text = element_text(color = "black", size = 20),
+        legend.position = "bottom",
+        panel.border = element_rect(color = "black", linewidth = 2)) +
+  ggview::canvas(height = 10, width = 12)
+
+ggsave(filename = "mapa_grade_fom.png",
+       height = 10, width = 12)
