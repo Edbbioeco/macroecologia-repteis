@@ -8,6 +8,8 @@ library(sf)
 
 library(ggview)
 
+library(cowplot)
+
 # Shapefile dos estados do Brasil ----
 
 ## Importar ----
