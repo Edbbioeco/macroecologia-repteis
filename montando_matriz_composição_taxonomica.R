@@ -14,7 +14,8 @@ comunidades <- purrr::map_dfr(
   c("gbif", 
     "specieslink", 
     "sibbr", 
-    "levantamento"), 
+    "levantamento",
+    "herpetohelp"), 
   \(registro){
     
     readxl::read_xlsx(paste0("./registros_", registro, ".xlsx")) |> 
