@@ -138,3 +138,7 @@ herpetohelp_registros <- herpetohelp_sf_fom |>
   dplyr::select(ID, Family, Especies, Presence) 
 
 herpetohelp_registros
+
+## Exportando ----
+
+herpetohelp_registros |> writexl::write_xlsx("registros_herpetohelp.xlsx")
