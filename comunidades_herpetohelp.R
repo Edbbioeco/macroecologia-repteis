@@ -72,3 +72,11 @@ herpetohelp_sf_fom
 ggplot() +
   geom_sf(data = grade) +
   geom_sf(data = herpetohelp_sf_fom)
+
+# Matriz de composição ----
+
+## Lista de espécies ----
+
+herpetohelp_sf_fom |> 
+  dplyr::pull(Espécie) |> 
+  unique()
