@@ -8,3 +8,11 @@ library(sf)
 
 library(writexl)
 
+# Dados ----
+
+## Shapefile da grade ----
+
+### Importando ----
+
+grade <- sf::st_read("grade_fom.shp")
+
