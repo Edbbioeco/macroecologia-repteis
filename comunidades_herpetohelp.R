@@ -60,3 +60,15 @@ herpetohelp_sf
 
 ggplot() +
   geom_sf(data = herpetohelp_sf)
+
+## Intersectando para a FOM ----
+herpetohelp_sf_fom <- herpetohelp_sf |> 
+  sf::st_intersection(grade |> 
+                        dplyr::summarise(geometry = geometry |> 
+                                           sf::st_union()))
+
+herpetohelp_sf_fom
+
+ggplot() +
+  geom_sf(data = grade) +
+  geom_sf(data = herpetohelp_sf_fom)
