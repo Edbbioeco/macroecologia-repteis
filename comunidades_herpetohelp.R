@@ -27,7 +27,8 @@ ggplot() +
 
 ### Importando ----
 
-herpetohelp <- readxl::read_xlsx("herptohelp.xlsx")
+herpetohelp <- readxl::read_xlsx("herptohelp.xlsx",,
+                                 sheet = 2)
 
 ### Visualizando ----
 
