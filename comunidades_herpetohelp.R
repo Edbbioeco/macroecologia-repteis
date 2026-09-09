@@ -40,7 +40,7 @@ herpetohelp |> dplyr::glimpse()
 
 ## Transformando em shapefile ----
 
-inaturalist_sf <- herpetohelp |>
+herpetohelp_sf <- herpetohelp |>
   dplyr::filter(Grupo == "Répteis") |>  
   dplyr::filter(!`Longitude no mapa (SIRGAS 2000)` |> is.na() &
                   !`Latitude no mapa (SIRGAS 2000)` |> is.na() &
@@ -56,7 +56,7 @@ inaturalist_sf <- herpetohelp |>
   sf::st_as_sf(coords = c("Longitude no mapa (SIRGAS 2000)", "Latitude no mapa (SIRGAS 2000)"),
                crs = grade |> sf::st_crs())
 
-inaturalist_sf
+herpetohelp_sf
 
 ggplot() +
-  geom_sf(data = inaturalist_sf)
+  geom_sf(data = herpetohelp_sf)
