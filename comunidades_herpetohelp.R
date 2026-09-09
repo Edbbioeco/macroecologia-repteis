@@ -126,3 +126,15 @@ herpetohelp_sf_fom <- herpetohelp_sf_fom |>
                   stringr::str_count("\\S+") == 1)
 
 herpetohelp_sf_fom
+
+## Montando a matriz de composição ----
+
+herpetohelp_registros <- herpetohelp_sf_fom |> 
+  sf::st_join(grade) |> 
+  as.data.frame() |> 
+  dplyr::mutate(Especies = Espécie,
+                Presence =  1,
+                Family = Família) |> 
+  dplyr::select(ID, Family, Especies, Presence) 
+
+herpetohelp_registros
