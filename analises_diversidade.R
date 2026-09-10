@@ -267,3 +267,39 @@ grade <- grade |>
     ))
 
 grade
+
+### Mapas ----
+
+ggplot() +
+  geom_sf(data = grade,
+          aes(color = `Max count of shared species` |> log(),
+              fill = `Max count of shared species` |> log())) +
+  scale_color_viridis_c(na.value = "#440154FF",
+                        guide = guide_colourbar(
+                          title.position = "top",
+                          title.hjust = 0.5,
+                          barwidth = 25,
+                          barheight = 2,
+                          frame.colour = "black",
+                          ticks.colour = "black"
+                        )) +
+  scale_fill_viridis_c(na.value = "#440154FF",
+                       guide = guide_colourbar(
+                         title.position = "top",
+                         title.hjust = 0.5,
+                         barwidth = 25,
+                         barheight = 2,
+                         frame.colour = "black",
+                         ticks.colour = "black"
+                       )) +
+  labs(fill = "Log max count of shared species",
+       color = "Log max count of shared species") +
+  theme_bw() +
+  theme(axis.text = element_text(size = 20, color = "black"),
+        legend.text = element_text(size = 20, color = "black"),
+        legend.title = element_text(size = 20,  color = "black"),
+        legend.position = "bottom",
+        panel.border = element_rect(color = "black", linewidth = 1),
+        plot.title = element_text(size = 30, color = "black", 
+                                  hjust = 0.5)) +
+  ggview::canvas(height = 10, width = 12)
