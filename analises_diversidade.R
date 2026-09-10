@@ -249,6 +249,7 @@ spe_comp <- comp |>
   as.matrix() |> 
   reshape2::melt() |> 
   dplyr::summarise("Mean shared species" = value |> max(),
-                   .by = Var1)
+                   .by = Var1) |> 
+  dplyr::rename("ID" = 1)
 
 spe_comp
