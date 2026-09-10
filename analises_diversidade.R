@@ -253,3 +253,17 @@ spe_comp <- comp |>
   dplyr::rename("ID" = 1)
 
 spe_comp
+
+### Adicionar os valores de dissimilaridade ao shapefile da grade ----
+
+grade <- grade |> 
+  dplyr::left_join(spe_comp,
+                   by = "ID") |> 
+  dplyr::mutate(`Max count of shared species` = dplyr::case_when(
+    
+    `Max count of shared species` |> is.na() ~ 0,
+    .default = `Max count of shared species`
+    
+    ))
+
+grade
