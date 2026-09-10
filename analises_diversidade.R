@@ -303,3 +303,6 @@ ggplot() +
         plot.title = element_text(size = 30, color = "black", 
                                   hjust = 0.5)) +
   ggview::canvas(height = 10, width = 12)
+
+ggsave(filename = "spe_comp_fom.png",
+       height = 10, width = 12)
