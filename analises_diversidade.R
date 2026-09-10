@@ -237,3 +237,18 @@ mapas_dis
 
 ggsave(filename = "dissimilaridade_fom.png",
        height = 10, width = 20)
+
+## Compartilhamento de espécies ----
+
+### Calcular ----
+
+spe_comp <- comp |> 
+  tibble::column_to_rownames(var = "ID") |> 
+  betapart::betapart.core() %>%
+  .$shared |> 
+  as.matrix() |> 
+  reshape2::melt() |> 
+  dplyr::summarise("Mean shared species" = value |> max(),
+                   .by = Var1)
+
+spe_comp
