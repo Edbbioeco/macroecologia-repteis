@@ -12,19 +12,6 @@ library(writexl)
 
 # Dados ----
 
-## Cidades ----
-
-### Importando ----
-
-cidades <- geobr::read_municipality(year = 2019)
-
-### Visualizando ----
-
-cidades
-
-ggplot() +
-  geom_sf(data = cidades)
-
 ## Grade -----
 
 ### Importando ----
@@ -102,3 +89,4 @@ lev_registros
 
 ## Exportando ----
 
+lev_registros |> writexl::write_xlsx("registros_levantamento.xlsx")
