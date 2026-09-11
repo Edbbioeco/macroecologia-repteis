@@ -39,12 +39,14 @@ sps |> dplyr::glimpse()
 
 ### Tratando ----
 
-lev_trat <- lev |> 
+sps_trat <- sps |> 
   tidyr::pivot_longer(cols = dplyr::where(is.numeric),
                       values_to = "Presence",
-                      names_to = "city")
+                      names_to = "Local") |> 
+  tidyr::pivot_wider(names_from = Especies,
+                     values_from = Presence)
 
-lev_trat
+sps_trat
 
 # Georreferenciamento dos registros ----
 
