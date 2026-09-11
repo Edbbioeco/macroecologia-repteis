@@ -33,9 +33,9 @@ sps <- readxl::read_xlsx("DADOS COPILADOS DA FOM 2026.xlsx")
 
 ### Visualizando ----
 
-lev
+sps
 
-lev |> dplyr::glimpse()
+sps |> dplyr::glimpse()
 
 ### Tratando ----
 
