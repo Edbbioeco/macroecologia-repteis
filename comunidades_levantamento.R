@@ -48,47 +48,15 @@ sps_trat <- sps |>
 
 sps_trat
 
-# Georreferenciamento dos registros ----
+## Coordenadas dos locais ----
 
-## Coordenadas das cidades ----
+### Importar ----
 
-coord_cidades <- cidades |> 
-  dplyr::filter(name_muni %in% unique(lev_trat$city)) |> 
-  sf::st_centroid() |> 
-  sf::st_coordinates() |> 
-  as.data.frame() |> 
-  dplyr::rename("Longitude" = X,
-                "Latitude" = Y) |> 
-  dplyr::mutate(city = unique(lev_trat$city))
+coord <- readxl::read_xlsx("DADOS COPILADOS DA FOM 2026.xlsx",
+                           sheet = 2)
 
-coord_cidades
+### Visualizar ----
 
-## Transformando os pontos em shapefile ----
+coord
 
-lev_sf <- lev_trat |> 
-  dplyr::left_join(coord_cidades,
-                   by = "city") |> 
-  sf::st_as_sf(coords = c("Longitude", "Latitude"),
-               crs = 4674)
-
-lev_sf
-
-ggplot() +
-  geom_sf(data = grade) +
-  geom_sf(data = lev_sf)
-
-# Matriz de composição ----
-
-## Montando a matriz ----
-
-lev_registros <- lev_sf |> 
-  sf::st_join(grade) |> 
-  as.data.frame() |> 
-  dplyr::select(ID, Especies, Presence) |> 
-  dplyr::filter(Presence == 1)
-
-lev_registros
-
-## Exportando ----
-
-lev_registros |> writexl::write_xlsx("registros_levantamento.xlsx")
+coord |> dplyr::glimpse()
