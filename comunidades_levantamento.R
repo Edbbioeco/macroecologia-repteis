@@ -196,3 +196,7 @@ sps_id <- sps_trat |>
   dplyr::relocate(c(ID, Family), .before = 1)
 
 sps_id
+
+## Exportando ----
+
+sps_id |> writexl::write_xlsx("registros_levantamento.xlsx")
