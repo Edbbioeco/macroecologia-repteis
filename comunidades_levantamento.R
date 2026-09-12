@@ -101,3 +101,13 @@ df_id_fom <- coord_sf_fom |>
   dplyr::select(Local, ID) |> as.data.frame()
 
 df_id_fom
+
+## Fazer o join para os dados de registro ----
+
+sps_id <- sps_trat |> 
+  dplyr::left_join(df_id_fom,
+                   by = "Local") |> 
+  dplyr::select(-c(geometry, Local)) |> 
+  dplyr::relocate(ID, .before = 1)
+
+sps_id
