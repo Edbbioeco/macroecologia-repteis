@@ -98,7 +98,7 @@ ggplot() +
 
 df_id_fom <- coord_sf_fom |> 
   sf::st_join(grade) |> 
-  dplyr::select(Local, ID) |> as.data.frame()
+  dplyr::select(Local, ID) 
 
 df_id_fom
 
@@ -107,7 +107,92 @@ df_id_fom
 sps_id <- sps_trat |> 
   dplyr::left_join(df_id_fom,
                    by = "Local") |> 
-  dplyr::select(-c(geometry, Local)) |> 
-  dplyr::relocate(ID, .before = 1)
+  dplyr::select(-c(geometry, Local)) |>
+  dplyr::mutate(
+    Especies = trimws(Especies),
+    Family = dplyr::case_when(
+      Especies %in% c("Acanthochelys spixii", 
+                      "Hydromedusa tectifera",
+                      "Phrynops geoffroanus", 
+                      "Phrynops williamsi",
+                      "Phrynops hilarii") ~ "Chelidae",
+      
+      Especies %in% c("Trachemys scripta", 
+                      "Trachemys dorbigni") ~ "Emydidae",
+      
+      Especies == "Amerotyphlops brongersmianus" ~ "Typhlopidae",
+      
+      Especies %in% c("Liotyphlops beui", 
+                      "Liotyphlops ternetzii") ~ "Anomalepididae",
+      
+      Especies %in% c("Amphisbaena darwinii", 
+                      "Amphisbaena dubia",
+                      "Amphisbaena mertensi", 
+                      "Amphisbaena prunicolor",
+                      "Amphisbaena trachura", 
+                      "Amphisbaena roberti",
+                      "Leposternon microcephalum") ~ "Amphisbaenidae",
+      
+      Especies == "Hemidactylus mabouia" ~ "Gekkonidae",
+      
+      Especies %in% c("Contomastix vacariensis", 
+                      "Salvator merianae",
+                      "Teius oculatus") ~ "Teiidae",
+      
+      Especies %in% c("Cercosaura schreibersii", 
+                      "Colobodactylus taunayi",
+                      "Mesotes strigatus", 
+                      "Pantodactylus schreibersii",
+                      "Placosoma glabellum") ~ "Gymnophthalmidae",
+      
+      Especies == "Notomabuya frenata" ~ "Scincidae",
+      
+      Especies %in% c("Diploglossus fasciatus", 
+                      "Ophiodes fragilis",
+                      "Ophiodes striatus") ~ "Diploglossidae",
+      
+      Especies %in% c("Enyalius iheringii", 
+                      "Enyalius perditus",
+                      "Urostrophus grilli", 
+                      "Urostrophus vautieri") ~ "Leiosauridae",
+      
+      Especies %in% c("Tropidurus catalanensis", 
+                      "Tropidurus torquatus") ~ "Tropiduridae",
+      
+      Especies %in% c("Epicrates crassus", 
+                      "Eunectes murinus",
+                      "Eunectes notaeus") ~ "Boidae",
+      
+      Especies %in% c("Bothrops alternatus", 
+                      "Bothrops diporus", 
+                      "Bothrops jararaca",
+                      "Bothrops jararacussu", 
+                      "Bothrops neuwiedi", 
+                      "Bothrops cotiara",
+                      "Bothrops moojeni", 
+                      "Bothrops pauloensis",
+                      "Crotalus durissus") ~ "Viperidae",
+      
+      Especies %in% c("Micrurus altirostris", 
+                      "Micrurus carvalhoi",
+                      "Micrurus corallinus", 
+                      "Micrurus frontalis") ~ "Elapidae",
+      
+      Especies %in% c("Chironius bicarinatus", 
+                      "Chironius exoletus", 
+                      "Chironius foveatus",
+                      "Chironius flavolineatus", 
+                      "Chironius laevicollis",
+                      "Chironius multiventris", 
+                      "Chironius gouveai",
+                      "Leptophis marginatus", 
+                      "Spilotes pullatus",
+                      "Tropidodryas serra", 
+                      "Tropidodryas striaticeps") ~ "Colubridae",
+      
+      TRUE ~ "Dipsadidae"  
+    )
+  ) |> 
+  dplyr::relocate(c(ID, Family), .before = 1)
 
 sps_id
