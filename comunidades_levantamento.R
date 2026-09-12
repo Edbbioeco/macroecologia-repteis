@@ -43,8 +43,7 @@ sps_trat <- sps |>
   tidyr::pivot_longer(cols = dplyr::where(is.numeric),
                       values_to = "Presence",
                       names_to = "Local") |> 
-  tidyr::pivot_wider(names_from = Especies,
-                     values_from = Presence)
+  dplyr::filter(Presence == 1)
 
 sps_trat
 
