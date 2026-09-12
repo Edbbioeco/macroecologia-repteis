@@ -8,6 +8,8 @@ library(sf)
 
 library(readxl)
 
+library(parzer)
+
 library(writexl)
 
 # Dados ----
