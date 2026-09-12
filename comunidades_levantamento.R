@@ -193,7 +193,8 @@ sps_id <- sps_trat |>
       TRUE ~ "Dipsadidae"  
     )
   ) |> 
-  dplyr::relocate(c(ID, Family), .before = 1)
+  dplyr::relocate(c(ID, Family), .before = 1) |> 
+  dplyr::filter(!ID |> is.na())
 
 sps_id
 
