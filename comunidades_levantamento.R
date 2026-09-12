@@ -93,3 +93,11 @@ coord_sf_fom
 ggplot() +
   geom_sf(data = grade) +
   geom_sf(data = coord_sf_fom)
+
+## Extrair as informações da grade ----
+
+df_id_fom <- coord_sf_fom |> 
+  sf::st_join(grade) |> 
+  dplyr::select(Local, ID) |> as.data.frame()
+
+df_id_fom
